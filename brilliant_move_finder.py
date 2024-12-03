@@ -34,6 +34,7 @@ def main():
 
     user_uuid = get_user_uuid(username)
     brilliant_dates = get_user_brilliant_dates(username, user_uuid)
+    print("Fetching potential games...")
     get_potential_games(username, brilliant_dates)
     print(f"Potential games saved to {username}_potential_{TARGET_TIME_CLASS}_games.csv")
 
@@ -95,6 +96,7 @@ def get_potential_games(username, brilliant_dates):
         if user_color == "white":
             user_rating = game["white"]["rating"]
             opponent_rating = game["black"]["rating"]
+            opponent_username = game["black"]["username"]
             result = game["white"]["result"]
 
             if 'accuracies' in game.keys():
@@ -107,6 +109,7 @@ def get_potential_games(username, brilliant_dates):
         else:
             user_rating = game["black"]["rating"]
             opponent_rating = game["white"]["rating"]
+            opponent_username = game["black"]["username"]
             result = game["black"]["result"]
 
             if 'accuracies' in game.keys():
@@ -122,6 +125,7 @@ def get_potential_games(username, brilliant_dates):
             "brilliant": "",
             "url": reviewed_url,
             "date": date,
+            "openent_username": opponent_username, 
             "user_rating": user_rating,
             "opponent_rating": opponent_rating,
             "result": result,
@@ -132,7 +136,7 @@ def get_potential_games(username, brilliant_dates):
     # sort csv_data by user_accuracy, ignore empty values 
     csv_data = sorted(csv_data, key=lambda x: x["user_accuracy"] if x["user_accuracy"] else 0, reverse=True)
 
-    csv_headers = ["brilliant", "url", "date", "user_rating", "opponent_rating",
+    csv_headers = ["brilliant", "url", "date", "openent_username", "user_rating", "opponent_rating",
                    "result", "user_accuracy", "opponent_accuracy"]
     with open(f"{username}_potential_{TARGET_TIME_CLASS}_games.csv", "w") as f:
         writer = csv.DictWriter(f, fieldnames=csv_headers)

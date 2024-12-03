@@ -41,7 +41,7 @@ format `<username>_potential_<time_class>_games.csv`
 The csv file will contain the following columns:
 
 ```csv
-brilliant,url,date,user_rating,opponent_rating,result,user_accuracy,opponent_accuracy
+brilliant,url,date,openent_username,user_rating,opponent_rating,result,user_accuracy,opponent_accuracy
 ```
 
 The `brilliant` column is left empty for you to quickly check the url of 
