@@ -84,7 +84,7 @@ def get_potential_games(username, brilliant_dates):
     for game in valid_games:
         # url, user_rating, opponent_rating, result, user_accuracy, opponent_accuracy
         user_color = None
-        if game["white"]["username"] == username:
+        if game["white"]["username"].lower() == username.lower():
             user_color = "white"
         else:
             user_color = "black"
@@ -109,7 +109,7 @@ def get_potential_games(username, brilliant_dates):
         else:
             user_rating = game["black"]["rating"]
             opponent_rating = game["white"]["rating"]
-            opponent_username = game["black"]["username"]
+            opponent_username = game["white"]["username"]
             result = game["black"]["result"]
 
             if 'accuracies' in game.keys():

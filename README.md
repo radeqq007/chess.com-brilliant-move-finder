@@ -15,12 +15,11 @@ where a brilliant move was played. While it still requires you to
 manually check the games in the browser, it will drastically reduce
 the amount of games you need to check and it's guaranteed to include
 all the games with brilliant moves in the output csv. 
- 
 
 
 Usage:
 
-```bash
+```shell
 git clone https://github.com/NotJoeMartinez/chess.com-brilliant-move-finder
 cd chess.com-brilliant-move-finder
 python3 -m venv .venv
@@ -32,8 +31,6 @@ python3 brilliant_move_finder.py <username> <time_class>
 Where `<username>` is your chess.com username and `<time_class>` is either
 rapid, blitz, bullet, daily. `<time_class>` is not required but is set 
 to rapid by default. 
-
-```
 
 This will genarate a csv file in the current directory with the 
 format `<username>_potential_<time_class>_games.csv`
