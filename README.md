@@ -21,6 +21,10 @@ all the games with brilliant moves in the output csv.
 Usage:
 
 ```bash
+git clone https://github.com/NotJoeMartinez/chess.com-brilliant-move-finder
+cd chess.com-brilliant-move-finder
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python3 brilliant_move_finder.py <username>
 ```
