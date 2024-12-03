@@ -7,23 +7,35 @@ import requests
 from pprint import pprint
 
 headers = {
-    'User-Agent': 'chess-rag-cli (https://github.com/NotJoeMartinez/chess-rag-cli)'
+    'User-Agent': 'chess-rag-cli (https://github.com/NotJoeMartinez/chess.com-brilliant-move-finder)'
 }
 TARGET_TIME_CLASS = "rapid"
 
 def main():
 
     if len(sys.argv) < 2:
-        print("Usage: python get_potential_games.py <username>")
+        print("Usage: python brilliant_move_finder.py <username> <time_class>")
         sys.exit(1)
+
+    if len(sys.argv) < 3:
+        print("No time class specified, using rapid")
+    else:
+        if sys.argv[2] not in ["bullet", "blitz", "rapid", "daily"]:
+            print("Invalid time class, using rapid")
+            sys.exit(1)
+        global TARGET_TIME_CLASS
+        TARGET_TIME_CLASS = sys.argv[2]
+
 
     username = sys.argv[1] 
     if "https://" in username:
         username = username.split('/')[-1]
 
+
     user_uuid = get_user_uuid(username)
     brilliant_dates = get_user_brilliant_dates(username, user_uuid)
     get_potential_games(username, brilliant_dates)
+    print(f"Potential games saved to {username}_potential_{TARGET_TIME_CLASS}_games.csv")
 
 
 def get_potential_games(username, brilliant_dates):
@@ -122,7 +134,7 @@ def get_potential_games(username, brilliant_dates):
 
     csv_headers = ["brilliant", "url", "date", "user_rating", "opponent_rating",
                    "result", "user_accuracy", "opponent_accuracy"]
-    with open(f"{username}_potential_games.csv", "w") as f:
+    with open(f"{username}_potential_{TARGET_TIME_CLASS}_games.csv", "w") as f:
         writer = csv.DictWriter(f, fieldnames=csv_headers)
         writer.writeheader()
         for row in csv_data:
@@ -131,7 +143,7 @@ def get_potential_games(username, brilliant_dates):
 
 
 def get_user_brilliant_dates(username, uuid):
-    url = f"https://www.chess.com/service/insights/{uuid}/rapid/all-time?uuid={uuid}"
+    url = f"https://www.chess.com/service/insights/{uuid}/{TARGET_TIME_CLASS}/all-time?uuid={uuid}"
     r = requests.get(url)
 
     if r.status_code == 200:
@@ -144,7 +156,6 @@ def get_user_brilliant_dates(username, uuid):
         brilliant_count = 0
         for day in moves_by_classification.keys():
             if 'brilliant' in moves_by_classification[day]:
-                # brillant_days.append((day, moves_by_classification[day]['brilliant']))
                 brillant_days.append(day)
                 brilliant_count += moves_by_classification[day]['brilliant']
 

@@ -26,11 +26,17 @@ cd chess.com-brilliant-move-finder
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python3 brilliant_move_finder.py <username>
+python3 brilliant_move_finder.py <username> <time_class>
+```
+
+Where `<username>` is your chess.com username and `<time_class>` is either
+rapid, blitz, bullet, daily. `<time_class>` is not required but is set 
+to rapid by default. 
+
 ```
 
 This will genarate a csv file in the current directory with the 
-format `<username>_potential_games.csv`
+format `<username>_potential_<time_class>_games.csv`
 
 The csv file will contain the following columns:
 
