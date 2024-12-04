@@ -6,6 +6,12 @@ You need to have a chess.com [premium account](https://www.chess.com/membership?
 and have your insights generated.  
 
 
+### Donations 🥺
+
+- [buymeacoffee](https://www.buymeacoffee.com/notjoemartinez)
+- [paypal](https://paypal.me/notjoemartinez)
+- [chess.com affiliate link](https://www.chess.com/membership?ref_id=74104030)
+
 Usage:
 
 ```shell
