@@ -59,3 +59,28 @@ Usage:
 Create a new `.env` file like the one in `.env_example` with the 
 path to your default firefox profile. You can find this directory
 by going to `about:profiles` in the firefox url bar. 
+
+
+**Make sure you are not running a firefox browser** at the same time you
+run this script. Pass the csv file output by `brilliant_move_finder.py` 
+as the first argument. 
+
+```shell
+python3 browser_automation.py username_potential_rapid_games.csv
+```
+
+This should spawn your firefox browser with all the bookmarks and 
+cookies, it will try to begin itterating through the game analysis
+of every game in the csv file. If you encounter a login screen,
+login to your account and navigate back to your terminal and press 
+enter, you should see 'Press Enter once you're logged in...' in the 
+terminal. 
+
+Suggestions: 
+
+Try clicking around randomly as the browser goes through the games, 
+this *might* reduce the chance of you encountering captchas.
+
+Use this script on a throw away premiumn account, or try not to 
+use this too much on an account you care about. chess.com is notorious
+about banning bots. 
